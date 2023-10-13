@@ -84,11 +84,27 @@ body {
     overflow: hidden;
 }
   
-.contenedor-cuadrado img {
+.contenedor-cuadrado svg {
     width: auto;
     height: 100%;
     display: block;
     margin: auto;
+}
+
+.links-derecha {
+    margin-left: auto;
+}
+
+@keyframes moveUp {
+    0%,
+    100% {
+      transform: translateY(1px);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(-1px);
+    }
 }
 
 /* Estilos para el primer ul */
