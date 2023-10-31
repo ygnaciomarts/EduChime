@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduChime - Página Principal Personalizable</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            width: 100%;
+            height: 400px;
+        }
+
+        .widget {
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            resize: both;
+            overflow: auto;
+        }
+
+        .editing .widget {
+            cursor: move;
+        }
+
+        .empty-cell {
+            border: 2px dashed #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <button id="edit-button">Modo Edición</button>
+    <button id="save-button" style="display: none;">Guardar Cambios</button>
+    <div id="grid-container">
+        <!-- Widgets se agregarán y eliminarán aquí dinámicamente -->
+    </div>
+
+    <script>
+        const editButton = document.getElementById('edit-button');
+        const saveButton = document.getElementById('save-button');
+        const gridContainer = document.getElementById('grid-container');
+
+        let isEditMode = false;
+
+        // Activa/desactiva el modo de edición
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+
+            if (isEditMode) {
+                editButton.style.display = 'none';
+                saveButton.style.display = 'block';
+                gridContainer.classList.add('editing');
+                makeWidgetsDraggable();
+            } else {
+                editButton.style.display = 'block';
+                saveButton.style.display = 'none';
+                gridContainer.classList.remove('editing');
+                makeWidgetsUndraggable();
+            }
+        }
+
+        // Hace que los widgets sean arrastrables
+        function makeWidgetsDraggable() {
+            const widgets = document.querySelectorAll('.widget');
+
+            widgets.forEach(widget => {
+                widget.draggable = true;
+
+                widget.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', null);
+                });
+            });
+
+            // Agregar eventos de arrastrar y soltar al grid
+            gridContainer.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            gridContainer.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const data = e.dataTransfer.getData('text/plain');
+                const widget = document.getElementById(data);
+
+                if (widget) {
+                    e.target.appendChild(widget);
+                }
+            });
+        }
+
+        // Hace que los widgets no sean arrastrables
+        function makeWidgetsUndraggable() {
+            const widgets = document.querySelectorAll('.widget');
+
+            widgets.forEach(widget => {
+                widget.draggable = false;
+            });
+        }
+
+        // Guarda la configuración de widgets al hacer clic en el botón
+        saveButton.addEventListener('click', () => {
+            // Implementa la lógica para guardar la configuración de los widgets.
+            alert('Cambios guardados');
+        });
+
+        // Agrega widgets de ejemplo
+        function addWidgets() {
+            for (let i = 1; i <= 12; i++) {
+                const widget = createWidget(`Widget ${i}`);
+                gridContainer.appendChild(widget);
+            }
+        }
+
+        // Crea un nuevo widget
+        function createWidget(name) {
+            const widget = document.createElement('div');
+            widget.className = 'widget';
+            widget.id = name.replace(/\s+/g, '-').toLowerCase();
+            widget.textContent = name;
+            widget.draggable = false;
+
+            return widget;
+        }
+
+        addWidgets();
+        editButton.addEventListener('click', toggleEditMode);
+    </script>
+</body>
+</html>
