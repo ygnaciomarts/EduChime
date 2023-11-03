@@ -18,7 +18,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 0.95rem;
-    font-family: "Helvetica Now Micro";
+    font-family: "Helvetica Now Micro" !important;
     letter-spacing: -1px;
 }
 
@@ -211,4 +211,30 @@ body {
       background-position: 0% 50%;
     }
 }
-  
+
+.popup-contenido {
+    display: grid;
+}
+
+.button {
+    border-width: 0px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+    background-image: -moz-linear-gradient( -39deg, rgb(227,91,56) 0%, rgb(235,177,65) 100%);
+    background-image: -webkit-linear-gradient( -39deg, rgb(227,91,56) 0%, rgb(235,177,65) 100%);
+    background-image: -ms-linear-gradient( -39deg, rgb(227,91,56) 0%, rgb(235,177,65) 100%);
+    box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    height: 60px;
+    z-index: 503;
+    cursor: pointer;
+    border-radius: 35px;
+}
+
+.text {
+    color: var(--white);
+    font-weight: 500;
+    font-size: 0.95rem;
+    font-family: "Helvetica Now Micro" !important;
+    letter-spacing: -1px;
+}
