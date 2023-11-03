@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Helvetica Now Micro';
+    src: url('HelveticaNowMicro-Medium.eot');
+    src: local('Helvetica Now Micro Medium'), local('HelveticaNowMicro-Medium'),
+        url('HelveticaNowMicro-Medium.eot?#iefix') format('embedded-opentype'),
+        url('HelveticaNowMicro-Medium.woff2') format('woff2'),
+        url('HelveticaNowMicro-Medium.woff') format('woff'),
+        url('HelveticaNowMicro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Now Micro';
+    src: url('HelveticaNowMicro-Regular.eot');
+    src: local('Helvetica Now Micro Regular'), local('HelveticaNowMicro-Regular'),
+        url('HelveticaNowMicro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('HelveticaNowMicro-Regular.woff2') format('woff2'),
+        url('HelveticaNowMicro-Regular.woff') format('woff'),
+        url('HelveticaNowMicro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Now Micro';
+    src: url('HelveticaNowMicro-Bold.eot');
+    src: local('Helvetica Now Micro Bold'), local('HelveticaNowMicro-Bold'),
+        url('HelveticaNowMicro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('HelveticaNowMicro-Bold.woff2') format('woff2'),
+        url('HelveticaNowMicro-Bold.woff') format('woff'),
+        url('HelveticaNowMicro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

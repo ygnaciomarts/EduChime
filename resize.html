@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduChime - Página Principal Personalizable</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+
+        .widget {
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            resize: both;
+            overflow: auto;
+            position: relative;
+            cursor: move;
+        }
+
+        .editing .widget {
+            cursor: grab;
+        }
+
+        .empty-cell {
+            border: 2px dashed #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .widget-catalog {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .widget-catalog button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="button text" id="edit-button">Modo Edición</button>
+    <button class="button text" id="save-button" style="display: none;">Guardar Cambios</button>
+    <div class="widget-catalog" style="display: none;">
+    </div>
+    <div id="grid-container">
+        <!-- Widgets se agregarán y eliminarán aquí dinámicamente -->
+    </div>
+
+    <script>
+        const editButton = document.getElementById('edit-button');
+        const saveButton = document.getElementById('save-button');
+        const gridContainer = document.getElementById('grid-container');
+        const widgetCatalog = document.querySelector('.widget-catalog');
+
+        let isEditMode = false;
+        let draggedWidget = null;
+        let currentConfiguration = null;
+
+        // Activa/desactiva el modo de edición
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const widgets = document.querySelectorAll('.widget');
+
+            if (isEditMode) {
+                editButton.style.display = 'none';
+                saveButton.style.display = 'block';
+                widgetCatalog.style.display = 'flex';
+                gridContainer.classList.add('editing');
+                widgets.forEach(widget => {
+                    widget.draggable = true;
+                    widget.addEventListener('dragstart', (e) => {
+                        draggedWidget = e.target;
+                    });
+                });
+            } else {
+                editButton.style.display = 'block';
+                saveButton.style.display = 'none';
+                widgetCatalog.style.display = 'none';
+                gridContainer.classList.remove('editing');
+                widgets.forEach(widget => {
+                    widget.draggable = false;
+                });
+            }
+        }
+
+        // Agrega widgets al catálogo
+        function addWidgetsToCatalog() {
+            const catalog = widgetCatalog;
+            const widgets = ['Recordatorio', 'Calendario', 'Gestión de Archivos', 'Notas', 'Cajón de Aplicaciones', 'Perfil'];
+
+            widgets.forEach(widget => {
+                const button = document.createElement('button');
+                button.textContent = `Agregar ${widget}`;
+                button.addEventListener('click', () => addWidget(widget));
+                catalog.appendChild(button);
+            });
+        }
+
+        // Añade un widget al grid
+        function addWidget(widgetType) {
+            const widget = createWidget(`Widget ${Math.floor(Math.random() * 1000)}`);
+            gridContainer.appendChild(widget);
+        }
+
+        // Crea un nuevo widget
+        function createWidget(name) {
+            const widget = document.createElement('div');
+            widget.className = 'widget';
+            widget.textContent = name;
+            widget.draggable = false;
+
+            widget.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            widget.addEventListener('drop', (e) => {
+                if (draggedWidget && draggedWidget !== widget) {
+                    const widgetIndex = Array.from(gridContainer.children).indexOf(widget);
+                    const draggedWidgetIndex = Array.from(gridContainer.children).indexOf(draggedWidget);
+                    gridContainer.insertBefore(draggedWidget, widgetIndex < draggedWidgetIndex ? widget : widget.nextSibling);
+                }
+            });
+
+            return widget;
+        }
+
+        // Comprueba si la configuración ha cambiado
+        function configurationChanged() {
+            const widgets = Array.from(gridContainer.querySelectorAll('.widget')).map(widget => widget.textContent);
+            const newConfiguration = JSON.stringify({ widgets });
+
+            if (currentConfiguration !== newConfiguration) {
+                currentConfiguration = newConfiguration;
+                return true;
+            }
+            return false;
+        }
+
+        // Agregar funcionalidad al botón "Guardar Cambios"
+        saveButton.addEventListener('click', () => {
+            if (configurationChanged()) {
+                saveConfiguration();
+            }
+            toggleEditMode();
+        });
+
+        // Guarda la configuración en un archivo JSON y lo descarga
+        function saveConfiguration() {
+            const widgets = Array.from(gridContainer.querySelectorAll('.widget')).map(widget => widget.textContent);
+            const configuration = { widgets };
+            const blob = new Blob([JSON.stringify(configuration, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'config.json';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Cargar la configuración desde un archivo JSON
+        function loadConfiguration() {
+            fetch('config.json')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.widgets) {
+                        data.widgets.forEach(widget => addWidget(widget));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar la configuración:', error);
+                });
+        }
+
+        // Llamar a la función para cargar la configuración al cargar la página
+        loadConfiguration();
+
+        addWidgetsToCatalog();
+        editButton.addEventListener('click', toggleEditMode);
+    </script>
+</body>
+</html>
