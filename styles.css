@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
+    font-family: 'Helvetica Now Micro', sans-serif;
 }
 
 body::before {
@@ -33,7 +34,6 @@ body::after {
     justify-content: center;
     align-items: center;
     height: 100vh;
-
 }
 #logo-container {
     display: flex; /* Coloca la imagen y el título en fila */
@@ -42,7 +42,7 @@ body::after {
 }
 
 #logo-container img {
-    max-width: 7%;
+    max-width: 80px;
     margin: 30px 10px;
    
 }
@@ -131,3 +131,24 @@ body::after {
 
 }
 
+#login-button:hover {
+    background: linear-gradient(-56deg, rgb(40, 232, 148) 0%, rgb(41, 208, 197) 100%);
+    transform: scale(1.01); /* Cambiar el tamaño del botón al hacer hover */
+}
+
+/* Estilos generales */
+@media screen and (max-width: 768px) {
+    /* Aplicar estilos específicos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+    body::before {
+        width: 100%;
+    }
+    body::after {
+        display: none; /* Ocultar el segundo fondo en pantallas pequeñas */
+    }
+    #logo-container img {
+        max-width: 80px; /* Aumentar el tamaño de la imagen del logo en pantallas pequeñas */
+    }
+    #login-container{
+        max-width: 100%;
+    }
+}
