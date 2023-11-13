@@ -4,6 +4,7 @@ body {
     padding: 0;
     position: relative;
     font-family: 'Helvetica Now Micro', sans-serif;
+    letter-spacing: -1px;
 }
 
 body::before {
@@ -91,7 +92,7 @@ body::after {
 
 #form-container label {
     margin: 10px 35px;
-    font-weight: bold;
+    font-weight:500;
     display: block;
     /* Hace que los labels sean elementos de bloque */
     margin-bottom: 0px;
