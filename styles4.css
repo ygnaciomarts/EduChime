@@ -1,0 +1,169 @@
+/*  Este styles es de la Página todo  */
+
+/* Estilos CSS para los elementos */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: 'Helvetica Now Micro', sans-serif;
+    letter-spacing: -1px;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(-56deg, rgb(255, 255, 255) 50%, rgb(202, 233, 231) 90%);
+    z-index: -1;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(126deg, rgb(255, 255, 255) 50%, rgb(202, 233, 231) 90%);
+    z-index: -1;
+}
+
+#login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#logo-container {
+    display: flex; /* Coloca la imagen y el título en fila */
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    justify-content: center;
+}
+
+#logo-container img {
+    max-width: 80px;
+    margin: 30px 10px;
+   
+}
+
+#logo-container h1 {
+    margin-left: 10px; /* Agrega espacio entre la imagen y el título */
+    color: white; /* Ajusta el color del título según tus preferencias */
+}
+
+#login-container h1 {
+    color: rgb(25, 19, 125);
+    
+}
+#login-container a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: rgb(25, 19, 125);
+   font-weight: bold;
+}
+
+#login-container p{
+    color: rgb(15, 11, 87);
+    
+}
+
+#login-box {
+    background: linear-gradient(-56deg, rgb(41, 208, 197) 0%, rgb(40, 232, 148) 100%);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+
+#login-box h1 {
+    color: white;
+}
+
+#form-container {
+    background: white;
+    padding: 25px 15px 5px;
+    border-radius: 15px;
+    text-align: left;
+    /* Alinea los elementos a la izquierda */
+}
+
+#form-container label {
+    margin: 10px 35px;
+    font-weight:500;
+    display: block;
+    /* Hace que los labels sean elementos de bloque */
+    margin-bottom: 0px;
+
+}
+
+#form-container input {
+    margin: 5px 35px;
+    padding: 8px;
+    width: 75%;
+    /* Ajusta el ancho de los inputs al 100% */
+    border: 1px #ccc;
+    border-radius: 10px;
+    background: rgb(238, 238, 238);
+}
+
+.terms-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Ajusta el margen superior según tus preferencias */
+}
+
+/* Estilo para el checkbox */
+.terms-container input {
+    margin: 5px;
+    width: 10%;
+}
+
+#image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login-button {
+    background: linear-gradient(-56deg, rgb(41, 208, 197) 0%, rgb(40, 232, 148) 100%);
+    color: white;
+    padding: 15px 135px;
+    /* Aumenta el tamaño del botón */
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 10px;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+}
+
+#login-button:hover {
+    background: linear-gradient(-56deg, rgb(40, 232, 148) 0%, rgb(41, 208, 197) 100%);
+    transform: scale(1.01); /* Cambiar el tamaño del botón al hacer hover */
+}
+
+/* Estilos generales */
+@media screen and (max-width: 768px) {
+    /* Aplicar estilos específicos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+    body::before {
+        width: 100%;
+    }
+    body::after {
+        display: none; /* Ocultar el segundo fondo en pantallas pequeñas */
+    }
+    #logo-container img {
+        max-width: 80px; /* Aumentar el tamaño de la imagen del logo en pantallas pequeñas */
+    }
+    #login-container{
+        max-width: 100%;
+    }
+}

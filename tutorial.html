@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles5.css">
+    <title>Introducción a EduChime - EduChime</title>
+</head>
+
+<body>
+    <img src="./img/EduChime-NL.png" class="img" alt="">
+    <h1>Introducción a EduChime</h1>
+
+    <!-- Barra de progreso -->
+    <div>
+        <progress id="progressBar" value="0" max="100"></progress>
+        <span id="progressText">0%</span>
+    </div>
+
+    <!-- Pregunta 1 -->
+    <div id="pregunta1" class="pregunta">
+        <p>Pregunta 1: ¿De dónde eres?</p>
+
+        <!-- Países -->
+        <label for="paises">País:</label>
+        <select id="paises" name="paises">
+            <option value="selecciona">Selecciona tu país</option>
+        </select>
+
+        <!-- Estados -->
+        <label for="estados">Estado:</label>
+        <select id="estados" name="estados">
+            <option value="selecciona">Selecciona tu estado</option>
+        </select>
+
+        <!-- Ciudades -->
+        <label for="ciudades">Ciudad:</label>
+        <select id="ciudades" name="ciudades">
+            <option value="selecciona">Selecciona tu ciudad</option>
+        </select>
+        <div class="botones">
+            <button onclick="mostrarSiguientePregunta('pregunta1')">Siguiente</button>
+        </div>
+
+    </div>
+
+    <!-- Pregunta 2 -->
+    <div id="pregunta2" class="pregunta">
+        <p>Pregunta 2: ¿Cuál universidad perteneces?</p>
+        <label>
+            <input type="radio" name="respuesta2" value="pacifico"> Instituto Tecnológico de la Laguna
+        </label>
+        <!-- Agrega el botón de retroceso -->
+        <div class="botones">
+            <button onclick="mostrarPreguntaAnterior('pregunta2')">Retroceder</button>
+            <button onclick="mostrarSiguientePregunta('pregunta2')">Siguiente</button>
+        </div>
+    </div>
+
+    <!-- Pregunta 3 -->
+    <div id="pregunta3" class="pregunta">
+        <p>Pregunta 3: ¿Qué carrera y especialidad estás cursando?</p>
+
+        <!-- Carreras -->
+        <label for="carrera">Carrera:</label>
+        <select id="carrera" name="carrera">
+            <option value="selecciona">Selecciona tu carrera</option>
+        </select>
+
+        <!-- Especialidades -->
+        <label for="especialidad">Especialidad:</label>
+        <select id="especialidad" name="especialidad">
+            <option value="selecciona">Selecciona tu especialidad</option>
+        </select>
+
+        <!-- Agrega el botón de retroceso -->
+        <div class="botones">
+            <button onclick="mostrarPreguntaAnterior('pregunta3')">Retroceder</button>
+            <button onclick="mostrarSiguientePregunta('pregunta3')">Terminar</button>
+        </div>
+
+    </div>
+
+    <!-- Fin del tutorial -->
+    <div id="fin" class="pregunta">
+        <h2>¡Gracias por completar la Introducción!</h2>
+        <p>¡Comenzamos!</p>
+    </div>
+
+    <script>
+        // Muestra la primera pregunta al cargar la página
+        document.getElementById('pregunta1').style.display = 'block';
+
+        // Obtener referencias a las listas desplegables
+        var paisesDropdown = document.getElementById('paises');
+        var estadosDropdown = document.getElementById('estados');
+        var ciudadesDropdown = document.getElementById('ciudades');
+        var carreraDropdown = document.getElementById('carrera');
+        var especialidadDropdown = document.getElementById('especialidad');
+
+        // Datos de ejemplo (puedes cargar estos datos desde una fuente externa)
+        var paises = ["México", "España", "Argentina"];
+        var estadosMexico = ["Selecciona tu estado", "Coahuila", "Chihuahua", "Nuevo León"];
+        var estadosEspana = ["Selecciona tu estado", "Madrid", "Barcelona", "Valencia"];
+        var estadosArgentina = ["Selecciona tu estado", "Buenos Aires", "Córdoba", "Santa Fe"];
+        var ciudadesCDMX = ["Selecciona tu ciudad", "Torreón", "Ciudad Juárez", "Monterrey"];
+        var ciudadesMadrid = ["Selecciona tu ciudad", "Centro", "Retiro", "Salamanca"];
+        var carrera = ["Ing. Sistemas Computacionales"];
+        var especiales = ["Tecnologías web y móvil",
+            "Tecnologías de la información y de la comunicación"];
+
+        // Llenar la lista de países
+        paises.forEach(function (pais) {
+            var option = document.createElement('option');
+            option.value = pais;
+            option.text = pais;
+            paisesDropdown.add(option);
+        });
+
+        // Función para llenar las listas de estados y ciudades según el país seleccionado
+        paisesDropdown.addEventListener('change', function () {
+            estadosDropdown.innerHTML = ""; // Limpiar lista de estados
+            ciudadesDropdown.innerHTML = ""; // Limpiar lista de ciudades
+
+            var selectedCountry = paisesDropdown.value;
+
+            // Llenar la lista de estados según el país seleccionado
+            if (selectedCountry === "México") {
+                estadosMexico.forEach(function (estado) {
+                    var option = document.createElement('option');
+                    option.value = estado;
+                    option.text = estado;
+                    estadosDropdown.add(option);
+                });
+            } else if (selectedCountry === "España") {
+                estadosEspana.forEach(function (estado) {
+                    var option = document.createElement('option');
+                    option.value = estado;
+                    option.text = estado;
+                    estadosDropdown.add(option);
+                });
+            } else if (selectedCountry === "Argentina") {
+                estadosArgentina.forEach(function (estado) {
+                    var option = document.createElement('option');
+                    option.value = estado;
+                    option.text = estado;
+                    estadosDropdown.add(option);
+                });
+            }
+        });
+
+        // Función para llenar la lista de ciudades según el estado seleccionado
+        estadosDropdown.addEventListener('change', function () {
+            ciudadesDropdown.innerHTML = ""; // Limpiar lista de ciudades
+
+            var selectedState = estadosDropdown.value;
+
+            // Llenar la lista de ciudades según el estado seleccionado
+            if (selectedState === "Coahuila") {
+                ciudadesCDMX.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            } else if (selectedState === "Madrid") {
+                ciudadesMadrid.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            } else if (selectedState === "Chihuahua") {
+                ciudadesCDMX.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            }
+            else if (selectedState === "Nuevo León") {
+                ciudadesCDMX.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            } else if (selectedState === "Barcelona") {
+                ciudadesMadrid.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            } else if (selectedState === "Valencia") {
+                ciudadesMadrid.forEach(function (ciudad) {
+                    var option = document.createElement('option');
+                    option.value = ciudad;
+                    option.text = ciudad;
+                    ciudadesDropdown.add(option);
+                });
+            }
+            // Puedes agregar más lógica aquí para otros estados y ciudades
+        });
+
+        // Llenar la lista de carreras
+        carrera.forEach(function (carreraMostrar) {
+            var option = document.createElement('option');
+            option.value = carreraMostrar;
+            option.text = carreraMostrar;
+            carreraDropdown.add(option);
+        });
+
+        // Llenar la lista de especialidades
+        especiales.forEach(function (especialidadMostrar) {
+            var option = document.createElement('option');
+            option.value = especialidadMostrar;
+            option.text = especialidadMostrar;
+            especialidadDropdown.add(option);
+        });
+
+        // Función para llenar las carreras y especialidades
+        carreraDropdown.addEventListener('change', function () {
+            especialidadDropdown.innerHTML = ""; // Limpiar lista de especialidades
+
+            var selectedCarrera = carreraDropdown.value;
+
+            // Llenar la lista de especialidades según la carrera seleccionada
+            if (selectedCarrera === "Ing. Sistemas Computacionales") {
+                especiales.forEach(function (especialidadMostrar) {
+                    var option = document.createElement('option');
+                    option.value = especialidadMostrar;
+                    option.text = especialidadMostrar;
+                    especialidadDropdown.add(option);
+                });
+            }
+            // Puedes agregar más lógica aquí para otras carreras y especialidades
+        });
+
+        function mostrarSiguientePregunta(idPregunta) {
+            // Oculta la pregunta actual
+            document.getElementById(idPregunta).style.display = 'none';
+
+            // Muestra la siguiente pregunta
+            var siguientePregunta = document.getElementById(idPregunta).nextElementSibling;
+            if (siguientePregunta) {
+                siguientePregunta.style.display = 'block';
+
+                // Actualiza la barra de progreso
+                actualizarProgreso();
+            }
+        }
+        function mostrarPreguntaAnterior(idPregunta) {
+            // Oculta la pregunta actual
+            document.getElementById(idPregunta).style.display = 'none';
+
+            // Muestra la pregunta anterior
+            var preguntaAnterior = document.getElementById(idPregunta).previousElementSibling;
+            if (preguntaAnterior) {
+                preguntaAnterior.style.display = 'block';
+
+                // Resta el progreso actual
+                restarProgreso();
+            }
+        }
+
+        function restarProgreso() {
+            // Calcula el progreso actual
+            var preguntasTotales = document.querySelectorAll('.pregunta').length;
+            var preguntasRespondidas = document.querySelectorAll('.pregunta[style="display: none;"]').length;
+
+            var progreso = (preguntasRespondidas / preguntasTotales) * 133;
+
+            // Resta un porcentaje al progreso actual (ajusta según sea necesario)
+            progreso = Math.max(progreso - 33, 0);
+
+            // Actualiza la barra de progreso y el texto
+            document.getElementById('progressBar').value = progreso;
+            document.getElementById('progressText').textContent = Math.round(progreso) + '%';
+        }
+
+
+
+        function actualizarProgreso() {
+            // Calcula el progreso actual
+            var preguntasTotales = document.querySelectorAll('.pregunta').length;
+            var preguntasRespondidas = document.querySelectorAll('.pregunta[style="display: none;"]').length;
+
+            var progreso = (preguntasRespondidas / preguntasTotales) * 133;
+
+            // Actualiza la barra de progreso y el texto
+            document.getElementById('progressBar').value = progreso;
+            document.getElementById('progressText').textContent = Math.round(progreso) + '%';
+        }
+    </script>
+
+</body>
+
+</html>
