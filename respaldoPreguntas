@@ -82,31 +82,6 @@
 
     </div>
 
-    <!-- Pregunta 4 -->
-    <div id="pregunta4" class="pregunta">
-        <p>Pregunta 4: ¿En qué semestre vas?</p>
-
-        <!-- Semestres -->
-        <label for="semestres">Semestre:</label>
-        <select id="semestres" name="semestres">
-            <option value="selecciona">Selecciona tu semestre</option>
-            <option value="sexto">Sexto semestre</option>
-            <option value="septimo">Séptimo semestre</option>
-        </select>
-
-        <!-- Materias según el semestre seleccionado -->
-        <label for="materias">Materias:</label>
-        <select id="materias" name="materias">
-            <option value="selecciona">Selecciona tus materias</option>
-        </select>
-
-        <div class="botones">
-            <button onclick="mostrarPreguntaAnterior('pregunta4')">Retroceder</button>
-            <button onclick="mostrarSiguientePregunta('pregunta4')">Siguiente</button>
-        </div>
-    </div>
-
-
     <!-- Fin del tutorial -->
     <div id="fin" class="pregunta">
         <h2>¡Gracias por completar la Introducción!</h2>
@@ -291,42 +266,14 @@
             }
         }
 
-        // Función para llenar las materias según el semestre seleccionado
-    var materiasDropdown = document.getElementById('materias');
-    var sextoSemestreMaterias = ["Ingeniería de Software", "Taller de Sistemas Operativos", "Redes de Computadoras"];
-    var septimoSemestreMaterias = ["Gestión de Proyectos de Software", "Programación Lógica y Funcional", "Lenguajes y Autómatas II"];
-
-    document.getElementById('semestres').addEventListener('change', function () {
-        // Limpiar lista de materias
-        materiasDropdown.innerHTML = "<option value='selecciona'>Selecciona tus materias</option>";
-
-        var selectedSemestre = document.getElementById('semestres').value;
-
-        // Llenar la lista de materias según el semestre seleccionado
-        if (selectedSemestre === "sexto") {
-            sextoSemestreMaterias.forEach(function (materia) {
-                var option = document.createElement('option');
-                option.value = materia;
-                option.text = materia;
-                materiasDropdown.add(option);
-            });
-        } else if (selectedSemestre === "septimo") {
-            septimoSemestreMaterias.forEach(function (materia) {
-                var option = document.createElement('option');
-                option.value = materia;
-                option.text = materia;
-                materiasDropdown.add(option);
-            });
-        }
-    });
-
+        
 
         function actualizarProgreso() {
             // Calcula el progreso actual
             var preguntasTotales = document.querySelectorAll('.pregunta').length;
             var preguntasRespondidas = document.querySelectorAll('.pregunta[style="display: none;"]').length;
 
-            var progreso = (preguntasRespondidas / preguntasTotales) * 125;
+            var progreso = (preguntasRespondidas / preguntasTotales) * 133;
 
             // Actualiza la barra de progreso y el texto
             document.getElementById('progressBar').value = progreso;
